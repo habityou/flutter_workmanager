@@ -81,17 +81,17 @@ class BackgroundWorker(
             val callbackInfo = FlutterCallbackInformation.lookupCallbackInformation(callbackHandle)
             val dartBundlePath = flutterLoader.findAppBundlePath()
 
-            if (isInDebug) {
-                DebugHelper.postTaskStarting(
-                    applicationContext,
-                    randomThreadIdentifier,
-                    dartTask,
-                    payload,
-                    callbackHandle,
-                    callbackInfo,
-                    dartBundlePath,
-                )
-            }
+            // if (isInDebug) {
+            //     DebugHelper.postTaskStarting(
+            //         applicationContext,
+            //         randomThreadIdentifier,
+            //         dartTask,
+            //         payload,
+            //         callbackHandle,
+            //         callbackInfo,
+            //         dartBundlePath,
+            //     )
+            // }
 
             engine?.let { engine ->
                 backgroundChannel = MethodChannel(engine.dartExecutor, BACKGROUND_CHANNEL_NAME)
@@ -117,16 +117,16 @@ class BackgroundWorker(
     private fun stopEngine(result: Result?) {
         val fetchDuration = System.currentTimeMillis() - startTime
 
-        if (isInDebug) {
-            DebugHelper.postTaskCompleteNotification(
-                applicationContext,
-                randomThreadIdentifier,
-                dartTask,
-                payload,
-                fetchDuration,
-                result ?: Result.failure(),
-            )
-        }
+        // if (isInDebug) {
+        //     DebugHelper.postTaskCompleteNotification(
+        //         applicationContext,
+        //         randomThreadIdentifier,
+        //         dartTask,
+        //         payload,
+        //         fetchDuration,
+        //         result ?: Result.failure(),
+        //     )
+        // }
 
         // No result indicates we were signalled to stop by WorkManager.  The result is already
         // STOPPED, so no need to resolve another one.
